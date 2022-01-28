@@ -1,0 +1,318 @@
+#define RMFG 0
+#define LMFG 1
+#define RMRG 2
+#define LMRG 3
+const int echopin =4;
+const int trigpin =5;
+int IR=6;
+long  duration , distance ,R,L;
+void sense ()
+{
+  if (digitalRead (IR = HIGH))
+  {
+    raisright();
+    delay(2000);
+    lowright();
+  }
+}
+void forward ()
+{
+  digitalWrite(RMFG , HIGH);
+  digitalWrite(LMFG , HIGH);
+  digitalWrite(RMRG , LOW);
+  digitalWrite(LMRG , LOW);
+}
+void reverse()
+{
+  digitalWrite(RMFG , LOW);
+  digitalWrite(LMFG , LOW);
+  digitalWrite(RMRG , HIGH);
+  digitalWrite(LMRG , HIGH);
+}
+void rightturnforward()
+{
+  digitalWrite(RMFG , LOW);
+  digitalWrite(LMFG , HIGH);
+  digitalWrite(RMRG , LOW);
+  digitalWrite(LMRG , LOW);
+}
+void leftturnforward()
+{
+  digitalWrite(RMFG , HIGH);
+  digitalWrite(LMFG , LOW);
+  digitalWrite(RMRG , LOW);
+  digitalWrite(LMRG , LOW);
+}
+void rightturnreverse()
+{
+  digitalWrite(RMFG , LOW);
+  digitalWrite(LMFG , LOW);
+  digitalWrite(RMRG , LOW);
+  digitalWrite(LMRG , HIGH);
+}
+void leftturnreverse()
+{
+  digitalWrite(RMFG , LOW);
+  digitalWrite(LMFG , LOW);
+  digitalWrite(RMRG , HIGH);
+  digitalWrite(LMRG , LOW);
+}
+void turnleftradii()
+{
+  digitalWrite(RMFG , HIGH);
+  digitalWrite(LMFG , LOW);
+  digitalWrite(RMRG , LOW);
+  digitalWrite(LMRG , HIGH);
+}
+void turnrightradii()
+{  
+  digitalWrite(RMFG , LOW);
+  digitalWrite(LMFG , HIGH);
+  digitalWrite(RMRG , HIGH);
+  digitalWrite(LMRG , LOW);
+}
+void brake()
+{  
+  digitalWrite(RMFG , LOW);
+  digitalWrite(LMFG , LOW);
+  digitalWrite(RMRG , LOW);
+  digitalWrite(LMRG , LOW);
+} 
+void boottracks()
+{
+  forward();
+  delay(2000);
+  reverse();
+  delay(2000);
+  turnrightradii();
+  delay(2000);
+  turnleftradii();
+  delay(2000);
+  brake();
+}
+#include <Servo.h>
+Servo rightbiceps;
+int pos_rb = 90;
+Servo rightforearm;
+int pos_rf = 90;
+Servo rightwrist;
+int pos_rw = 90;
+Servo leftbiceps;
+int pos_lb = 90;
+Servo leftforearm;
+int pos_lf = 90;
+Servo leftwrist;
+int pos_lw = 90;
+Servo head ;
+int pos=90;
+void rightbicepsup ()
+{
+  for (pos_rb < 180; pos_rb <= 180 ; pos_rb++)
+    rightbiceps.write(pos_rb);
+}
+void rightforearmsup()
+{
+  for (pos_rf < 180; pos_rf <= 180; pos_rf++)
+    rightforearm.write(pos_rf);
+}
+void rightwristup ()
+{
+  for (pos_rw < 180; pos_rw <= 180; pos_rw++)
+    rightwrist.write(pos_rw);
+}
+
+void rightbicepdown ()
+{
+  for (pos_rb > 0; pos_rb >= 0 ; pos_rb--)
+    rightbiceps.write(pos_rb);
+}
+void rightforearmsdown()
+{
+  for (pos_rf > 0; pos_rf >= 0; pos_rf--)
+    rightforearm.write(pos_rf);
+}
+void rightwristdown ()
+{
+  for (pos_rw > 0; pos_rw >= 0; pos_rw--)
+    rightwrist.write(pos_rw);
+}
+
+void leftbicepup ()
+{
+  for (pos_lb < 180; pos_lb <= 180 ; pos_lb++)
+    leftbiceps.write(pos_lb);
+}
+void leftforearmsup()
+{
+  for (pos_lf < 180; pos_lf <= 180; pos_lf++)
+    leftforearm.write(pos_lf);
+}
+void leftwristup ()
+{
+  for (pos_lw < 180; pos_lw <= 180; pos_lw++)
+    leftwrist.write(pos_lw);
+}
+
+void leftbicepdown ()
+{
+  for (pos_lb > 0; pos_lb >= 0 ; pos_lb--)
+    leftbiceps.write(pos_lb);
+}
+void leftforearmsdown()
+{
+  for (pos_lf > 0; pos_lf >= 0; pos_lf--)
+    leftforearm.write(pos_lf);
+}
+void leftwristdown ()
+{
+  for (pos_lw > 0; pos_lw >= 0; pos_lw--)
+    leftwrist.write(pos_lw);
+}
+void raisright()
+{
+  rightbicepsup();
+  delay(500);
+  rightforearmsup();
+  delay(500);
+  rightwristup();
+}
+void raisleft()
+{
+  leftbicepup();
+  delay(500);
+  leftforearmsup();
+  delay(500);
+  leftwristup();
+}
+void lowright()
+{
+  rightbicepdown();
+  delay(500);
+  rightforearmsdown();
+  delay(500);
+  rightwristdown();
+}
+void lowleft()
+{
+  leftbicepdown();
+  delay(500);
+  leftforearmsdown();
+  delay(500);
+  leftwristdown();
+}
+void bootarms()
+{
+  raisleft();
+  delay(2000);
+  raisright();
+  lowleft();
+  delay(1500);
+  lowright();
+}
+
+void lookleft()
+{
+  for(pos=90;pos>=0;pos--)
+  {
+    head.write(pos);
+  }
+}
+void lookright()
+{
+  for(pos=90;pos<=180;pos++)
+  {
+    head.write(pos);
+  }
+}
+void lookstraight ()
+{
+ if (pos > 90)
+ {
+  for(pos=0;pos<=90;pos++)
+  {
+   head.write(pos);   
+  }
+ }
+  else if (pos < 90)
+  {
+    for (pos=180;pos>=90;pos--)
+    {
+      head.write(pos);
+    }
+  }
+}
+void launchtracksmode()
+{ 
+  digitalWrite(trigpin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigpin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigpin, LOW);
+  duration = pulseIn(echopin, HIGH);
+  distance = duration * 0.034 / 2; 
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+  if (distance<5)
+{
+  lookleft();
+  delay(3000);
+  distance=L;
+  lookstraight();
+  delay(3000);
+  distance=R;
+  lookright();
+  delay(3000);
+}
+else
+{
+  forward();
+  }
+if (L>R)
+{
+  turnleftradii();
+  delay(3000);
+  forward();
+}
+if (R>L)
+{
+  turnrightradii();
+  delay(3000);
+  forward();
+}
+}
+void boothead()
+{
+  lookleft();
+  delay(2000);
+  lookstraight();
+  delay(2000);
+  lookright();
+  delay(2000);
+  lookstraight();
+}
+void setup()
+{
+  head.attach(7);
+  rightbiceps.attach(8);
+  rightforearm.attach(9);
+  rightwrist.attach(10);
+   leftbiceps.attach(11);
+  leftforearm.attach(12);
+  leftwrist.attach(13); 
+  pinMode(LMFG , OUTPUT);
+  pinMode(RMFG , OUTPUT);
+  pinMode(RMRG , OUTPUT);
+  pinMode(LMRG , OUTPUT);
+  pinMode(echopin , INPUT);
+  pinMode(trigpin ,OUTPUT);
+  pinMode(IR,INPUT);
+  boottracks();
+  bootarms();
+  boothead();
+}
+void loop()
+{
+  launchtracksmode();
+  Serial.println(distance);
+}
