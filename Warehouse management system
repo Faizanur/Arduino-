@@ -1,0 +1,124 @@
+#include <Keypad.h>
+const int ROW_NUM = 4;
+const int COLUMN_NUM = 4;
+
+char keys[ROW_NUM][COLUMN_NUM] = {
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'}
+};
+
+byte pin_rows[ROW_NUM] = {7,6,5,4};
+byte pin_column[COLUMN_NUM] = {3,2,1,0};
+int R1 =8;
+int R2 =9;
+int R3 =10;
+int R4 =11;
+int R5 =12;
+int R6 =13;
+Keypad keypad = Keypad( makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM );
+
+const String RACK_1_LOWER = "001"; 
+const String RACK_1_UPPER = "100";
+const String RACK_2_LOWER = "101";
+const String RACK_2_UPPER = "200";
+const String RACK_3_LOWER = "201"; 
+const String RACK_3_UPPER = "300";
+const String RACK_4_LOWER = "301"; 
+const String RACK_4_UPPER = "400";
+const String RACK_5_LOWER = "401";
+const String RACK_5_UPPER = "500";
+const String RACK_6_LOWER = "501"; 
+const String RACK_6_UPPER = "600";
+String input_password;
+
+
+void setup(){
+  pinMode(R1 ,OUTPUT);
+  pinMode(R2 ,OUTPUT);
+  pinMode(R3 ,OUTPUT);
+  pinMode(R4 ,OUTPUT);
+  pinMode(R5 ,OUTPUT);
+  pinMode(R6 ,OUTPUT);
+ input_password.reserve(32);
+ digitalWrite(R1,LOW);
+ digitalWrite(R2,LOW);
+ digitalWrite(R3,LOW);
+ digitalWrite(R4,LOW);
+ digitalWrite(R5,LOW);
+ digitalWrite(R6,LOW);
+}
+void finding()
+{
+  char key = keypad.getKey();
+  if (key)
+  {
+    Serial.println(key);
+
+      if(key == '*') 
+      {
+        input_password = "";
+      } 
+      else if(key == 'D') 
+      {
+      if(input_password <= RACK_1_UPPER &input_password>RACK_1_LOWER) 
+      {
+        digitalWrite(R1,HIGH);
+        delay(5000);
+        digitalWrite(R1,LOW);
+        }
+      else if (input_password <= RACK_2_UPPER & input_password>RACK_1_UPPER)
+      {
+        digitalWrite(R2,HIGH);
+        delay(5000);
+        digitalWrite(R2,LOW);
+        }
+      else if (input_password <= RACK_3_UPPER & input_password>RACK_2_UPPER)
+      {
+        digitalWrite(R3,HIGH);
+        delay(5000);
+        digitalWrite(R3,LOW);
+      }
+      else if((input_password <= RACK_4_UPPER & input_password>RACK_3_UPPER))  
+      {
+        digitalWrite(R4,HIGH);
+        delay(5000);
+        digitalWrite(R4,LOW);
+        }
+      else if((input_password <= RACK_5_UPPER & input_password>RACK_4_UPPER))  
+      {
+        digitalWrite(R5,HIGH);
+        delay(5000);
+        digitalWrite(R5,LOW);
+        }
+      else if((input_password <= RACK_6_UPPER & input_password>RACK_5_UPPER))  
+      {
+        digitalWrite(R6,HIGH);
+        delay(5000);
+        digitalWrite(R6,LOW);
+        }
+      else
+      {
+        digitalWrite(R1,HIGH);
+        digitalWrite(R2,HIGH);
+        digitalWrite(R3,HIGH);
+        digitalWrite(R4,HIGH);
+        digitalWrite(R5,HIGH);
+        digitalWrite(R6,HIGH);
+        delay(500);
+      }
+
+      input_password = "";
+    }
+    else 
+    {
+      input_password += key; 
+    }
+  }
+}
+
+void loop()
+{
+  finding();
+}
