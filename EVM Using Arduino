@@ -1,0 +1,224 @@
+
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(8,9,10,11,12,13);
+int participantA = 1;
+int Astate= 0;
+int participantB = 2;
+int Bstate=0;
+int participantC = 3;
+int Cstate=0;
+int participantD = 4;
+int Dstate=0;
+int participantE = 5;
+int Estate=0;
+int participantNOTA = 6;
+int NOTAstate=0;
+int A=0;
+int B=0;
+int C=0;
+int D=0;
+int E=0;
+int NOTA=0;
+int SUM=10;
+int voting = 0;
+void votingbegin()
+{
+if (Astate ==HIGH)
+  {
+   lcd.setCursor(0,1);
+   lcd.print("you voted A");
+  delay(1000);
+   lcd.clear();
+  voting=voting+1;
+    A=A+1;
+  }
+   else if (Bstate ==HIGH)
+   {
+   lcd.setCursor(0,1);
+   lcd.print("you voted B");
+     delay(1000);
+     lcd.clear();
+     voting=voting+1;
+     B=B+1;
+   }
+    else if(Cstate ==HIGH)
+    {
+      lcd.setCursor(0,1);
+   lcd.print("you voted C");
+      delay(1000);
+      lcd.clear();
+      voting=voting+1;
+      C=C+1;
+    }
+     else if (Dstate == HIGH)
+     {
+      lcd.setCursor(0,1);
+   lcd.print("you voted D ");
+       delay(1000);
+     lcd.clear();
+       voting=voting+1;
+      D=D+1;
+     }
+      else if (Estate == HIGH)
+      {
+        lcd.setCursor(0,1);
+   lcd.print("you voted E");
+     delay(1000);
+        lcd.clear();
+        voting=voting+1;
+          E=E+1;
+      }
+      else if (NOTAstate == HIGH)
+      {
+      lcd.setCursor(0,1);
+   lcd.print("you voted NOTA");
+        delay(1000);
+      lcd.clear();
+        voting=voting+1;
+          NOTA=NOTA +1;
+      }
+}    
+
+void setup() {
+  lcd.begin(16,2);
+  pinMode (participantA ,INPUT);
+  pinMode (participantB ,INPUT);  
+  pinMode (participantC ,INPUT);
+  pinMode (participantD ,INPUT);
+  pinMode (participantE ,INPUT);
+  pinMode (participantNOTA ,INPUT);
+  
+}
+
+void loop() { 
+  lcd.setCursor(0, 0);
+  lcd.print("USE YOUR RIGHT");
+  Astate =digitalRead (participantA);
+  Bstate =digitalRead (participantB);
+  Cstate =digitalRead (participantC);
+  Dstate =digitalRead (participantD);
+  Estate =digitalRead (participantE);
+  NOTAstate =digitalRead (participantNOTA);
+  if (voting<=SUM)
+  {
+    votingbegin ();
+    
+  }
+  else 
+  {
+    lcd.clear();
+    delay(500);
+     lcd.setCursor(0, 0);
+    lcd.print("voting ended");
+    delay(3000);
+      lcd.clear();
+     lcd.setCursor(0, 0);
+     lcd.print("A GOT");
+     delay(1000);
+     lcd.setCursor(0, 1);
+     lcd.print(A);
+     delay(1000);
+        lcd.clear();
+     lcd.setCursor(0, 0);
+     lcd.print("B GOT");
+     delay(1000);
+     lcd.setCursor(0, 1);
+     lcd.print(B);
+     delay(1000);
+        lcd.clear();
+     lcd.setCursor(0, 0); 
+     lcd.print("C GOT");
+     delay(1000);
+     lcd.setCursor(0, 1);
+     lcd.print(C);
+     delay(1000);
+     lcd.setCursor(0, 0);
+        lcd.clear();
+     lcd.print("D GOT");
+     delay(1000);
+     lcd.setCursor(0, 1);
+     lcd.print(D);
+     delay(1000);
+     lcd.setCursor(0, 0);
+     lcd.print("E GOT");
+     delay(1000);
+        lcd.clear();
+     lcd.setCursor(0, 1);
+     lcd.print(E);
+     delay(1000);
+        lcd.clear();
+     lcd.setCursor(0, 0);
+     lcd.print("NOTA GOT");
+     delay(1000);
+     lcd.setCursor(0, 1);
+     lcd.print(NOTA);
+     delay(1000);
+        lcd.clear();
+    if(A>B &A>C &A>D &A>E &A>NOTA)
+    {  lcd.setCursor(0,1);
+     lcd.print("A WON ") ;
+      delay(3000);
+    }
+    else if (B>A &B>C &B>D &B>E &B>NOTA)
+       {  lcd.setCursor(0,1);
+     lcd.print(" B WON ") ;
+      delay(3000);
+      lcd.setCursor(0,1);
+    }
+      else if (C>A &C>B &C>D &C>E &C>NOTA)
+       {  lcd.setCursor(0,1);
+     lcd.print(" C WON ") ;
+      delay(3000);
+      lcd.setCursor(0,1);
+    }
+      else if (D>A &D>B &D>C &D>E &D>NOTA)
+       {  lcd.setCursor(0,1);
+     lcd.print(" D WON ") ;
+      delay(3000);
+      lcd.setCursor(0,1);
+    }
+    else if (E>A &E>B &E>C &E>D &E>NOTA)
+       {  lcd.setCursor(0,1);
+     lcd.print(" E WON ") ;
+      delay(3000);
+      lcd.setCursor(0,1);
+    }
+    else if (NOTA>A &NOTA>B &NOTA>C &NOTA>E &NOTA>D)
+       {  lcd.setCursor(0,1);
+     lcd.print(" NOTA ") ;
+      delay(3000);
+      lcd.setCursor(0,1);
+  }
+   if(A==B ||A==C ||A==D ||A==E ||A==NOTA)
+    {  lcd.setCursor(0,1);
+     lcd.print("A WON ") ;
+      delay(3000);
+    }
+    else if (B==A ||B==C ||B==D ||B==E ||B==NOTA)
+       {  lcd.setCursor(0,1);
+     lcd.print(" there is a tie ") ;
+      delay(3000);
+    }
+      else if (C==A ||C==B ||C==D ||C==E ||C==NOTA)
+       {  lcd.setCursor(0,1);
+     lcd.print(" there is tie ") ;
+      delay(3000);
+    }
+      else if (D==A ||D==B || D==C ||D==E ||D==NOTA)
+       {  lcd.setCursor(0,1);
+     lcd.print(" there is tie ") ;
+      delay(3000);
+    }
+    else if (E==A ||E==B ||E==C ||E==D ||E==NOTA)
+       {  lcd.setCursor(0,1);
+     lcd.print(" there is tie ") ;
+      delay(3000);
+    }
+    else if (NOTA==A || NOTA==B || NOTA==C ||NOTA==E ||NOTA==D)
+       {  lcd.setCursor(0,1);
+     lcd.print("there is tie ") ;
+      delay(3000);
+  }
+  }
+}
+ 
