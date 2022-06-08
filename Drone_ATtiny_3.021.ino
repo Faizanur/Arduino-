@@ -29,81 +29,81 @@ else
 
 void up()
 {
-  analogWrite(motorA,2000);
-  analogWrite(motorB,2000);
-  analogWrite(motorC,2000);
-  analogWrite(motorD,2000);
+  analogWrite(motorA,1023);
+  analogWrite(motorB,1023);
+  analogWrite(motorC,1023);
+  analogWrite(motorD,1023);
 }
 
 void down()
 {
-  analogWrite(motorA,100);
-  analogWrite(motorB,100);
-  analogWrite(motorC,100);
-  analogWrite(motorD,100);
+  analogWrite(motorA,300);
+  analogWrite(motorB,300);
+  analogWrite(motorC,300);
+  analogWrite(motorD,300);
 }
 
 void forward()
 {
   analogWrite(motorA,750);
   analogWrite(motorB,750);
-  analogWrite(motorC,2000);
-  analogWrite(motorD,2000);
+  analogWrite(motorC,1023);
+  analogWrite(motorD,1023);
 }
 
 void reverse()
 {
-  analogWrite(motorA,2000);
-  analogWrite(motorB,2000);
+  analogWrite(motorA,1023);
+  analogWrite(motorB,1023);
   analogWrite(motorC,750);
   analogWrite(motorD,750);
 }
 
 void rightroll()
 {
-  analogWrite(motorA,2000);
+  analogWrite(motorA,1023);
   analogWrite(motorB,750);
   analogWrite(motorC,750);
-  analogWrite(motorD,2000);
+  analogWrite(motorD,1023);
 }
 
 void leftroll()
 {
   analogWrite(motorA,750);
-  analogWrite(motorB,2000);
-  analogWrite(motorC,2000);
+  analogWrite(motorB,1023);
+  analogWrite(motorC,1023);
   analogWrite(motorD,750);
 }
 
 void rightfor()
 {
-  analogWrite(motorA,2000);
+  analogWrite(motorA,1023);
   analogWrite(motorB,750);
-  analogWrite(motorC,2000);
-  analogWrite(motorD,2000);
+  analogWrite(motorC,1023);
+  analogWrite(motorD,1023);
 }
 
 void rightrev()
 {
-  analogWrite(motorA,2000);
-  analogWrite(motorB,2000);
-  analogWrite(motorC,2000);
+  analogWrite(motorA,1023);
+  analogWrite(motorB,1023);
+  analogWrite(motorC,1023);
   analogWrite(motorD,750);
 }
 
 void leftfor()
 {
   analogWrite(motorA,750);
-  analogWrite(motorB,2000);
-  analogWrite(motorC,2000);
-  analogWrite(motorD,2000);
+  analogWrite(motorB,1023);
+  analogWrite(motorC,1023);
+  analogWrite(motorD,1023);
 }
 
 void leftrev()
 {
-  analogWrite(motorA,2000);
-  analogWrite(motorB,2000);
-  analogWrite(motorC,2000);
+  analogWrite(motorA,1023);
+  analogWrite(motorB,1023);
+  analogWrite(motorC,1023);
   analogWrite(motorD,750);
 }
 
